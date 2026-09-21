@@ -1,0 +1,15 @@
+services:
+  turn:
+    image: coturn/coturn:latest
+    restart: unless-stopped
+    network_mode: host
+    command: >-
+      -n
+      --log-file=stdout
+      --listening-port=3478
+      --fingerprint
+      --lt-cred-mech
+      --realm=${TURN_REALM}
+      --user=${TURN_USERNAME}:${TURN_CREDENTIAL}
+      --min-port=49152
+      --max-port=65535
